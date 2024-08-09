@@ -1,0 +1,29 @@
+<div class="col-10 mx-auto">
+<div class="card ">
+    <span class="text-900 text-xl font-bold mb-4 block">Create Grade</span>
+    <form [formGroup]="gradeForm" (ngSubmit)="createGrade()">
+    <div class="grid">
+        <div class="col-12 lg:col-0">
+
+        </div>
+        <div class="col-12 lg:col-12">
+            <div class="grid formgrid p-fluid">
+                <div class="field mb-4 col-12  ">
+                    <label for="name" class="font-medium text-900">Name</label>
+                    <input id="name" type="text" pInputText formControlName="name">
+                    <small class="ng-dirty ng-invalid" *ngIf="gradeForm.get('name')!.hasError('required') && (gradeForm.get('name')!.dirty || gradeForm.get('name')!.touched)">Name is required.</small>
+                </div>
+                <div class="field mb-4 col-12 ">
+                    <label for="description" class="font-medium text-900">Description</label>
+                    <input id="description" type="text" pInputText formControlName="description">
+                    <small class="ng-dirty ng-invalid" *ngIf="gradeForm.get('description')!.hasError('required') && (gradeForm.get('description')!.dirty || gradeForm.get('description')!.touched)">Description is required.</small>
+                </div>
+                <div class="col-12">
+                    <button pButton pRipple label="Create" class="w-auto mt-3" [disabled]="gradeForm.invalid"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+</div>

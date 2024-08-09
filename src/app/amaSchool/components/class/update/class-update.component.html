@@ -1,0 +1,40 @@
+<div class="col-10 mx-auto">
+    <div class="card">
+        <span class="text-900 text-xl font-bold mb-4 block">Update Class</span>
+        <form [formGroup]="classeForm" (ngSubmit)="updateClasse()">
+            <div class="grid">
+                <div class="col-12 lg:col-0">
+
+                </div>
+                <div class="col-12 lg:col-12">
+                    <div class="grid formgrid p-fluid">
+                        <div class="field mb-4 col-12 md:col-6">
+                            <label for="name" class="font-medium text-900">Name</label>
+                            <input id="name" type="text" pInputText formControlName="name">
+                            <small class="ng-dirty ng-invalid" *ngIf="classeForm.get('name')!.hasError('required') && (classeForm.get('name')!.dirty || classeForm.get('name')!.touched)">Name is required.</small>
+                        </div>
+                        <div class="field mb-4 col-12 md:col-6">
+                            <label for="capacity" class="font-medium text-900">Capacity</label>
+                            <input id="capacity" type="number" pInputText formControlName="studentLimit">
+                            <small class="ng-dirty ng-invalid" *ngIf="classeForm.get('studentLimit')!.hasError('required') && (classeForm.get('studentLimit')!.dirty || classeForm.get('studentLimit')!.touched)">Capacity is required.</small>
+                        </div>
+                        <div class="field mb-4 col-12 md:col-12">
+                            <label for="grade" class="font-medium text-900">Grade</label>
+                            <p-dropdown inputId="grade" [options]="grades" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Country" formControlName="grade">
+                                <ng-template let-grade pTemplate="item">
+                                    <div class="flex align-items-center">
+                                        <div>{{grade.name}}</div>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+                        </div>
+
+                        <div class="col-12">
+                            <button pButton pRipple label="Update" type="submit" class="w-auto mt-3"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
