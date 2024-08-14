@@ -1,0 +1,48 @@
+<div class="col-10 mx-auto">
+    <div class="card">
+        <span class="text-900 text-xl font-bold mb-4 block">Update Teacher</span>
+        <form [formGroup]="teacherForm" (ngSubmit)="updateTeacher()">
+            <div class="grid">
+                <div class="col-12 lg:col-0"></div>
+                <div class="col-12 lg:col-12">
+                    <div class="grid formgrid p-fluid">
+                        <div class="field mb-4 col-12 md:col-6">
+                            <label for="firstName" class="font-medium text-900">First Name</label>
+                            <input id="firstName" type="text" pInputText formControlName="firstName">
+                            <small class="ng-dirty ng-invalid" *ngIf="teacherForm.get('firstName')!.hasError('required') && (teacherForm.get('firstName')!.dirty || teacherForm.get('firstName')!.touched)">First Name is required.</small>
+                        </div>
+                        <div class="field mb-4 col-12 md:col-6">
+                            <label for="lastName" class="font-medium text-900">Last Name</label>
+                            <input id="lastName" type="text" pInputText formControlName="lastName">
+                            <small class="ng-dirty ng-invalid" *ngIf="teacherForm.get('lastName')!.hasError('required') && (teacherForm.get('lastName')!.dirty || teacherForm.get('lastName')!.touched)">Last Name is required.</small>
+                        </div>
+                        <div class="field mb-4 col-12 md:col-6">
+                            <label for="cin" class="font-medium text-900">CIN</label>
+                            <input id="cin" type="text" pInputText formControlName="cin">
+                            <small class="ng-dirty ng-invalid" *ngIf="teacherForm.get('cin')!.hasError('required') && (teacherForm.get('cin')!.dirty || teacherForm.get('cin')!.touched)">CIN is required.</small>
+                        </div>
+                        <div class="field mb-4 col-12 md:col-6">
+                            <label for="email" class="font-medium text-900">Email</label>
+                            <input id="email" type="email" pInputText formControlName="email">
+                            <small class="ng-dirty ng-invalid" *ngIf="teacherForm.get('email')!.hasError('required') && (teacherForm.get('email')!.dirty || teacherForm.get('email')!.touched)">Valid email is required.</small>
+                        </div>
+                        <div class="field mb-4 col-12 md:col-6">
+                            <label for="phone" class="font-medium text-900">Phone</label>
+                            <input id="phone" type="text" pInputText formControlName="phone">
+                            <small class="ng-dirty ng-invalid" *ngIf="teacherForm.get('phone')!.hasError('required') && (teacherForm.get('phone')!.dirty || teacherForm.get('phone')!.touched)">Phone number is required.</small>
+                        </div>
+                        <div class="field mb-4 col-12 md:col-12">
+                            <label for="specialtyCode" class="font-medium text-900">Specialty Code</label>
+                            <input id="specialtyCode" type="text" pInputText formControlName="specialtyCode"
+                                   [placeholder]="teacherForm.get('specialtyCode')?.value">
+                        </div>
+
+                        <div class="col-12">
+                            <button pButton pRipple label="Update" type="submit" class="w-auto mt-3"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
