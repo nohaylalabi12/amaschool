@@ -1,0 +1,33 @@
+<div class="col-10 mx-auto">
+    <div class="card">
+        <span class="text-900 text-xl font-bold mb-4 block">Create Teacher Specialty</span>
+        <form [formGroup]="teacherSpecialtyForm" (ngSubmit)="createTeacherSpecialty()">
+            <div class="grid">
+                <div class="col-12 lg:col-0"></div>
+                <div class="col-12 lg:col-12">
+                    <div class="grid formgrid p-fluid">
+                        <div class="field mb-4 col-12">
+                            <label for="name" class="font-medium text-900">Name</label>
+                            <input id="name" type="text" pInputText formControlName="name">
+                            <small class="ng-dirty ng-invalid" *ngIf="teacherSpecialtyForm.get('name')!.hasError('required') && (teacherSpecialtyForm.get('name')!.dirty || teacherSpecialtyForm.get('name')!.touched)">
+                                Name is required.
+                            </small>
+                        </div>
+                        
+                        <div class="field mb-4 col-12">
+                            <label for="description" class="font-medium text-900">Description</label>
+                            <input id="description" type="text" pInputText formControlName="description">
+                            <small class="ng-dirty ng-invalid" *ngIf="teacherSpecialtyForm.get('description')!.hasError('required') && (teacherSpecialtyForm.get('description')!.dirty || teacherSpecialtyForm.get('description')!.touched)">
+                                Description is required.
+                            </small>
+                        </div>
+
+                        <div class="col-12">
+                            <button pButton pRipple label="Create" class="w-auto mt-3" [disabled]="teacherSpecialtyForm.invalid"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
