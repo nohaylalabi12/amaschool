@@ -1,0 +1,29 @@
+<div class="col-10 mx-auto">
+    <div class="card ">
+        <span class="text-900 text-xl font-bold mb-4 block">Create Room</span>
+        <form [formGroup]="roomForm" (ngSubmit)="createRoom()">
+            <div class="grid">
+                <div class="col-12 lg:col-0">
+
+                </div>
+                <div class="col-12 lg:col-12">
+                    <div class="grid formgrid p-fluid">
+                        <div class="field mb-4 col-12  ">
+                            <label for="name" class="font-medium text-900">Name</label>
+                            <input id="name" type="text" pInputText formControlName="name">
+                            <small class="ng-dirty ng-invalid" *ngIf="roomForm.get('name')!.hasError('required') && (roomForm.get('name')!.dirty || roomForm.get('name')!.touched)">Name is required.</small>
+                        </div>
+                        <div class="field mb-4 col-12 ">
+                            <label for="capacity" class="font-medium text-900">Capacity</label>
+                            <input id="capacity" type="text" pInputText formControlName="capacity">
+                            <small class="ng-dirty ng-invalid" *ngIf="roomForm.get('capacity')!.hasError('required') && (roomForm.get('capacity')!.dirty || roomForm.get('capacity')!.touched)">Capacity is required.</small>
+                        </div>
+                        <div class="col-12">
+                            <button pButton pRipple label="Create" class="w-auto mt-3" [disabled]="roomForm.invalid"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
