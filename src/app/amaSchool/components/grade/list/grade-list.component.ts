@@ -50,8 +50,6 @@ export class GradeListComponent {
   }
   showSuccessViaToast() {
       this.messageService.add({ key: 'tst2', severity: 'success', summary: 'Success', detail: 'Grade successfully deleted' });
-
-
   }
   showErrorViaToast() {
     this.messageService.add({ key: 'tst3', severity: 'error', summary: 'Error', detail: 'Grade not deleted' });

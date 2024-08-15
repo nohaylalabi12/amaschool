@@ -1,0 +1,86 @@
+<p-toast key="tst2"></p-toast>
+<p-toast key="tst3"></p-toast>
+<div>
+    <span class="text-900 font-medium text-4xl mb-4">List of </span>
+    <span class="text-primary font-medium text-4xl mb-4">Students</span>
+</div>
+<br>
+<p-progressBar *ngIf="students === undefined || students.length === 0" mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
+<div class="card" *ngIf="students !== undefined">
+    <p-messages [value]="msgs"></p-messages>
+    <p-table #dt [value]="students" [paginator]="false" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
+             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10, 25, 50]"
+    >
+        <ng-template pTemplate="caption">
+            <form [formGroup]="searchForm">
+                <div class="flex flex-wrap gap-3 align-items-center ">
+                    <span class=" w-full sm:w-12rem flex-order-1 sm:flex-order-0">
+                        <input pInputText type="text" placeholder="Search by code" class="w-full m-0" formControlName="studentCode" />
+                    </span>
+                    <span class=" w-full sm:w-12rem flex-order-1 sm:flex-order-0">
+                        <input pInputText type="text" placeholder="Search by CNE" class="w-full m-0" formControlName="cne" />
+                    </span>
+                    <span class=" w-full sm:w-12rem flex-order-1 sm:flex-order-0">
+                        <input pInputText type="text" placeholder="Search by FirstName" class="w-full m-0" formControlName="firstName" />
+                    </span>
+                    <span class=" w-full sm:w-12rem flex-order-1 sm:flex-order-0">
+                        <input pInputText type="text" placeholder="Search by LastName" class="w-full m-0" formControlName="lastName" />
+                    </span>
+
+                    <button pButton type="submit" label="" icon="pi pi-search" (click)="searchStudents()" ></button>
+
+                    <div class="flex flex-wrap gap-2 ml-auto">
+                        <button (click)="navigateToCreateStudent()" pButton class="p-button-outlined w-full sm:w-auto flex-order-0 sm:flex-order-1" icon="pi pi-plus" label="Add"></button>
+                        <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="exportExcel()"></button>
+                    </div>
+                </div>
+            </form>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="photo" class="white-space-nowrap" style="width:10%">Photo <p-sortIcon field="photo"></p-sortIcon></th>
+                <th pSortableColumn="Code" class="white-space-nowrap" style="width:20%">Code <p-sortIcon field="Code"></p-sortIcon></th>
+                <th pSortableColumn="Cne" class="white-space-nowrap" style="width:20%">Cne <p-sortIcon field="Cne"></p-sortIcon></th>
+                <th pSortableColumn="firstName" class="white-space-nowrap" style="width:10%">First Name <p-sortIcon field="firstName"></p-sortIcon></th>
+                <th pSortableColumn="lastName" class="white-space-nowrap" style="width:10%">Last Name <p-sortIcon field="lastName"></p-sortIcon></th>
+                <th pSortableColumn="dateOfBirth" class="white-space-nowrap" style="width:15%">Date of Birth<p-sortIcon field="dateOfBirth"></p-sortIcon></th>
+                <th pSortableColumn="BirthPlace" class="white-space-nowrap" style="width:15%">Birth Place <p-sortIcon field="BirthPlace"></p-sortIcon></th>
+                <th pSortableColumn="Email" class="white-space-nowrap" style="width:30%">Email <p-sortIcon field="Email"></p-sortIcon></th>
+                <th class="white-space-nowrap" style="width:10%"></th>
+                <th class="white-space-nowrap" style="width:10%"></th>
+                <th class="white-space-nowrap" style="width:10%"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-student>
+            <tr>
+                <td><p-avatar [label]="student.name" [image]="student.photo" styleClass="mr-2" size="large" shape="circle"></p-avatar></td>
+                <td>{{student.studentCode}}</td>
+                <td>{{student.cne}}</td>
+                <td>{{student.firstName}}</td>
+                <td>{{student.lastName}}</td>
+                <td>{{student.dateOfBirth}}</td>
+                <td>{{student.birthPlace}}</td>
+                <td>{{student.email}}</td>
+                <td>
+                    <p-dialog header="Confirmation" [(visible)]="displayDialog[student.studentCode]" [modal]="true" showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px': '75vw'}">
+                        <p class="line-height-3 m-0">
+                            <i class="pi pi-exclamation-triangle" style="font-size: 25px"></i> Are you sure You want to delete the student {{student.studentCode}}?
+                        </p>
+                        <ng-template pTemplate="footer">
+                            <button pButton icon="pi pi-check" (click)="deleteStudent(student.studentCode)" label="Yes" class="p-button-outlined"></button>
+                        </ng-template>
+                    </p-dialog>
+                    <button (click)="displayDialog[student.studentCode]=true" pButton icon="pi pi-times" class="p-button-rounded p-button-danger p-button-outlined"></button>
+                </td>
+                <td>
+                    <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success p-button-outlined" (click)="navigateToUpdateStudent(student.studentCode)"></button>
+                </td>
+                <td>
+                    <button pButton pRipple type="button" icon="pi pi-eye" class="p-button-rounded p-button-text p-button-outlined" (click)="navigateToDetails(student.studentCode)"></button></td>
+                <td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="0" [rows]="10" [totalRecords]="totalElements" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+</div>

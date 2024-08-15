@@ -1,0 +1,57 @@
+<!-- student-create.component.html -->
+<div class="col-10 mx-auto">
+    <div class="card ">
+        <span class="text-900 text-xl font-bold mb-4 block">Update Student</span>
+        <form [formGroup]="studentForm" (ngSubmit)="updateStudent()">
+            <div class="grid">
+                <div class="col-12 lg:col-0">
+
+                </div>
+                <div class="col-12 lg:col-12">
+                    <div class="grid formgrid p-fluid">
+                        <div class="field mb-4 col-12  ">
+                            <label for="cne" class="font-medium text-900">Cne</label>
+                            <input id="cne" type="text" pInputText formControlName="cne">
+                            <small class="ng-dirty ng-invalid" *ngIf="studentForm.get('cne')!.hasError('required') && (studentForm.get('cne')!.dirty || studentForm.get('cne')!.touched)">cne is required.</small>
+                        </div>
+                        <div class="field mb-4 col-12 lg:col-6">
+                            <label for="firstName" class="font-medium text-900">First Name</label>
+                            <input id="firstName" type="text" pInputText formControlName="firstName">
+                            <small class="ng-dirty ng-invalid" *ngIf="studentForm.get('firstName')!.hasError('required') && (studentForm.get('firstName')!.dirty || studentForm.get('firstName')!.touched)">First Name is required.</small>
+                        </div>
+
+                        <div class="field mb-4 col-12 lg:col-6">
+                            <label for="lastName" class="font-medium text-900">Last Name</label>
+                            <input id="lastName" type="text" pInputText formControlName="lastName">
+                            <small class="ng-dirty ng-invalid" *ngIf="studentForm.get('lastName')!.hasError('required') && (studentForm.get('lastName')!.dirty || studentForm.get('lastName')!.touched)">Last Name is required.</small>
+                        </div>
+                        <div class="field mb-4 col-12 lg:col-6 ">
+                            <label for="dateOfBirth" class="font-medium text-900">Date Of Birth</label>
+                            <input id="dateOfBirth" type="date" pInputText formControlName="dateOfBirth">
+                            <small class="ng-dirty ng-invalid" *ngIf="studentForm.get('dateOfBirth')!.hasError('required') && (studentForm.get('dateOfBirth')!.dirty || studentForm.get('dateOfBirth')!.touched)">Date Of Birth is required.</small>
+                        </div>
+                        <div class="field mb-4 col-12 lg:col-6 ">
+                            <label for="birthPlace" class="font-medium text-900">Birth Place</label>
+                            <input id="birthPlace" type="text" pInputText formControlName="birthPlace">
+                            <small class="ng-dirty ng-invalid" *ngIf="studentForm.get('birthPlace')!.hasError('required') && (studentForm.get('birthPlace')!.dirty || studentForm.get('birthPlace')!.touched)">Birth Place is required.</small>
+                        </div>
+                        <div class="field mb-4 col-12  ">
+                            <label for="photo" class="font-medium text-900">Photo</label>
+                            <input id="photo" type="text" pInputText formControlName="photo" name="photo" alt="">
+                            <small class="ng-dirty ng-invalid" *ngIf="studentForm.get('photo')!.hasError('required') && (studentForm.get('photo')!.dirty || studentForm.get('photo')!.touched)">Photo is required.</small>
+                        </div>
+                        <div class="field mb-4 col-12  ">
+                            <label for="email" class="font-medium text-900">Email</label>
+                            <input id="email" type="email" pInputText formControlName="email">
+                            <small class="ng-dirty ng-invalid" *ngIf="studentForm.get('email')!.hasError('required') && (studentForm.get('email')!.dirty || studentForm.get('email')!.touched)">Email is required.</small>
+                        </div>
+
+                        <div class="col-12">
+                            <button pButton pRipple label="Update" class="w-auto mt-3" [disabled]="studentForm.invalid"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

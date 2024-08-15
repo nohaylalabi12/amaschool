@@ -48,7 +48,13 @@ export class ClassService {
     return this.http.post<ClassResponse>(this.apiUrl, classe);
 
   }
-  updateClass(classe: ClassRequest): Observable<ClassResponse> {
+
+    updateClass(classe: {
+        studentLimit: any;
+        currentStudents: any;
+        name: any;
+        classeCode: any
+    }): Observable<ClassResponse> {
     return this.http.put<ClassResponse>(this.apiUrl,  classe);
 
   }

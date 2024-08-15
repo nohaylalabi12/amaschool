@@ -1,15 +1,16 @@
 <p-toast key="tst2"></p-toast>
 <p-toast key="tst3"></p-toast>
-<div> <span class="text-900 font-medium text-4xl mb-4 ">List of</span><span class="text-primary font-medium text-4xl mb-4 "> Grades</span></div>
+<div>
+    <span class="text-900 font-medium text-4xl mb-4 ">List of</span>
+    <span class="text-primary font-medium text-4xl mb-4 "> Grades</span>
+</div>
 <br>
 <p-progressBar *ngIf="grades === undefined || grades.length === 0" mode="indeterminate" [style]="{ height: '6px' }"  />
 <div class="card" *ngIf="grades !== undefined">
     <p-messages [value]="msgs"></p-messages>
     <p-table #dt [value]="grades" [paginator]="false" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]"
-
     >
-
         <ng-template pTemplate="caption">
             <form [formGroup]="searchForm" >
                 <div class="flex flex-wrap gap-2 align-items-center justify-content-between">
