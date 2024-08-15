@@ -1,0 +1,22 @@
+<div class="col-10 mx-auto">
+  <div class="card">
+    <span class="text-900 text-xl font-bold mb-4 block">Delete Class</span>
+    <form [formGroup]="classeForm" (ngSubmit)="deleteclasse()">
+      <div class="grid">
+        <div class="col-12 lg:col-12">
+          <div class="grid formgrid p-fluid">
+            <div class="field mb-4 col-12 md:col-6">
+              <label for="code" class="font-medium text-900">Class Code</label>
+              <input id="code" type="text" pInputText formControlName="code" >
+              <small class="ng-dirty ng-invalid" *ngIf="classeForm.get('code')!.hasError('required') && (classeForm.get('code')!.dirty || classeForm.get('code')!.touched)">Class code is required.</small>
+            </div>
+
+            <div class="col-12">
+              <button pButton pRipple label="Delete" type="submit" class="w-auto mt-3" [disabled]="classeForm.invalid"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

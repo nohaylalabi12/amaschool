@@ -3,32 +3,86 @@
         <span class="text-900 text-xl font-bold mb-4 block">Update Class</span>
         <form [formGroup]="classeForm" (ngSubmit)="updateClasse()">
             <div class="grid">
-                <div class="col-12 lg:col-0">
-
-                </div>
                 <div class="col-12 lg:col-12">
                     <div class="grid formgrid p-fluid">
+                        <!-- Name Field -->
                         <div class="field mb-4 col-12 md:col-6">
                             <label for="name" class="font-medium text-900">Name</label>
                             <input id="name" type="text" pInputText formControlName="name">
-                            <small class="ng-dirty ng-invalid" *ngIf="classeForm.get('name')!.hasError('required') && (classeForm.get('name')!.dirty || classeForm.get('name')!.touched)">Name is required.</small>
+                            @if (classeForm.get('name')!.hasError('required') && 
+                                 (classeForm.get('name')!.dirty || classeForm.get('name')!.touched)) {
+                                <small class="ng-dirty ng-invalid">
+                                    Name is required.
+                                </small>
+                            }
                         </div>
+
+                        <!-- Capacity Field -->
                         <div class="field mb-4 col-12 md:col-6">
                             <label for="capacity" class="font-medium text-900">Capacity</label>
                             <input id="capacity" type="number" pInputText formControlName="studentLimit">
-                            <small class="ng-dirty ng-invalid" *ngIf="classeForm.get('studentLimit')!.hasError('required') && (classeForm.get('studentLimit')!.dirty || classeForm.get('studentLimit')!.touched)">Capacity is required.</small>
-                        </div>
-                        <div class="field mb-4 col-12 md:col-12">
-                            <label for="grade" class="font-medium text-900">Grade</label>
-                            <p-dropdown inputId="grade" [options]="grades" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Country" formControlName="grade">
-                                <ng-template let-grade pTemplate="item">
-                                    <div class="flex align-items-center">
-                                        <div>{{grade.name}}</div>
-                                    </div>
-                                </ng-template>
-                            </p-dropdown>
+                            @if (classeForm.get('studentLimit')!.hasError('required') && 
+                                 (classeForm.get('studentLimit')!.dirty || classeForm.get('studentLimit')!.touched)) {
+                                <small class="ng-dirty ng-invalid">
+                                    Capacity is required.
+                                </small>
+                            }
                         </div>
 
+                        <!-- Current Students Field -->
+                        <div class="field mb-4 col-12 md:col-6">
+                            <label for="currentStudents" class="font-medium text-900">Current Students</label>
+                            <input id="currentStudents" type="number" pInputText formControlName="currentStudents">
+                            @if (classeForm.get('currentStudents')!.hasError('required') && 
+                                 (classeForm.get('currentStudents')!.dirty || classeForm.get('currentStudents')!.touched)) {
+                                <small class="ng-dirty ng-invalid">
+                                    Current Students is required.
+                                </small>
+                            }
+                        </div>
+
+                        <!-- Grade Field -->
+                       <!-- Grade Field -->
+<div class="field mb-4 col-12 md:col-12">
+    <label for="grade" class="font-medium text-900">Grade</label>
+    <p-dropdown 
+        inputId="grade" 
+        [options]="grades" 
+        optionLabel="label" 
+        optionValue="value" 
+        [filter]="true" 
+        filterBy="label" 
+        [showClear]="true" 
+        placeholder="Select a Grade" 
+        formControlName="grade">
+        <ng-template let-grade pTemplate="item">
+            <div class="flex align-items-center">
+                <div>{{ grade.label }}</div>
+            </div>
+        </ng-template>
+    </p-dropdown>
+</div>
+
+
+                        <!-- Courses Field -->
+                        <div class="field mb-4 col-12 md:col-12">
+                            <label for="courses" class="font-medium text-900">Courses</label>
+                            <p-multiSelect 
+                                [options]="courses" 
+                                optionLabel="label" 
+                                optionValue="value" 
+                                formControlName="courseCodes" 
+                                defaultLabel="Select Courses" 
+                                filterBy="label">
+                                <ng-template let-course pTemplate="selectedItem">
+                                    <div class="flex align-items-center">
+                                        <div>{{ course.label }}</div>
+                                    </div>
+                                </ng-template>
+                            </p-multiSelect>
+                        </div>
+
+                        <!-- Update Button -->
                         <div class="col-12">
                             <button pButton pRipple label="Update" type="submit" class="w-auto mt-3"></button>
                         </div>
