@@ -43,6 +43,7 @@ export class AppMenuComponent implements OnInit {
                     }
                 ]
             },
+<<<<<<< HEAD
             {
                 label: 'Students',
                 icon: 'pi pi-fw pi-bars',
@@ -60,6 +61,26 @@ export class AppMenuComponent implements OnInit {
 
                 ]
             },
+=======
+               {
+                label: 'Rooms',
+                              icon: 'pi pi-fw pi-bars',
+                              items: [
+                                  {
+                                      label: 'List',
+                                      icon: 'pi pi-fw pi-list',
+                                      routerLink: ['rooms/list']
+                                  },
+                                  {
+                                      label: 'Create',
+                                      icon: 'pi pi-fw pi-plus',
+                                      routerLink: ['rooms/create']
+                                  }
+                              ]
+                          },
+
+
+>>>>>>> origin/feature_salle
             // {
             //     label: 'Classes',
             //     icon: 'pi pi-fw pi-clone',

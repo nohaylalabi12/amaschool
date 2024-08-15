@@ -1,0 +1,75 @@
+<p-toast key="tst2"></p-toast>
+<p-toast key="tst3"></p-toast>
+<div> <span class="text-900 font-medium text-4xl mb-4 ">List of</span><span class="text-primary font-medium text-4xl mb-4 "> Rooms</span></div>
+<br>
+<p-progressBar *ngIf="rooms === undefined || rooms.length === 0" mode="indeterminate" [style]="{ height: '6px' }"  />
+<div class="card" *ngIf="rooms !== undefined">
+    <p-messages [value]="msgs"></p-messages>
+    <p-table #dt [value]="rooms" [paginator]="false" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
+             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]"
+
+    >
+
+        <ng-template pTemplate="caption">
+            <form [formGroup]="searchForm" (ngSubmit)="search()">
+                <div class="flex flex-wrap gap-3 align-items-center ">
+            <span class=" w-full sm:w-12rem flex-order-1 sm:flex-order-0">
+    <input pInputText type="text"  placeholder="Search by code" class="w-full" formControlName="roomCode"/>
+            </span>
+                    <span class=" w-full sm:w-12rem flex-order-1 sm:flex-order-0">
+    <input pInputText type="text"  placeholder="Search by name" class="w-full" formControlName="name"/>
+</span>
+
+
+                    <button pButton type="submit" label="" icon="pi pi-search" (click)="search()" ></button>
+
+                    <div class="flex flex-wrap gap-2 ml-auto">
+                    <button (click)="navigateToCreateRoom()" pButton class="p-button-outlined w-full sm:w-auto flex-order-0 sm:flex-order-1" icon="pi pi-plus" label="Add"></button>
+                    <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="dt.exportCSV()"></button>
+                </div>
+                </div>
+            </form>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="Code" class="white-space-nowrap" style="width:25%">Code <p-sortIcon field="Code"></p-sortIcon></th>
+                <th pSortableColumn="Name" class="white-space-nowrap" style="width:25%">Name <p-sortIcon field="Name"></p-sortIcon></th>
+                <th pSortableColumn="Description" class="white-space-nowrap" style="width:45%">Capacity <p-sortIcon field="Capacity"></p-sortIcon></th>
+                <th  class="white-space-nowrap" style="width:25%"></th>
+                <th  class="white-space-nowrap" style="width:25%"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-room>
+            <tr>
+                <td>{{room.roomCode}}</td>
+                <td>{{room.name}}</td>
+                <td>{{room.capacity}}</td>
+                <td>
+                    <p-dialog header="Confirmation"  [(visible)]="displayDialog[room.roomCode]" [modal]="true" showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px': '75vw'}" >
+                        <p  class="line-height-3 m-0">
+                            <i class="pi pi-exclamation-triangle" style="font-size: 25px"></i>   Are you sure You want to delete the room {{room.roomCode}}
+                        </p>
+                        <ng-template pTemplate="footer">
+                            <button pButton icon="pi pi-check" (click)="deleteRoom(room.roomCode)" label="Yes" class="p-button-outlined"></button>
+                        </ng-template>
+                    </p-dialog>
+                    <button (click)="displayDialog[room.roomCode]=true" pButton icon="pi pi-times" class="p-button-rounded p-button-danger p-button-outlined" ></button>
+                </td>
+                <td>
+                    <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success p-button-outlined" (click)="navigateToUpdateRoom(room.roomCode)"></button>
+                </td>
+
+
+
+            </tr>
+        </ng-template>
+    </p-table>
+
+<!--    (onPageChange)="onPageChange($event)"-->
+    <p-paginator
+            (onPageChange)="onPageChange($event)"
+            [first]="0"
+            [rows]="10"
+            [totalRecords]="totalElements"
+            [rowsPerPageOptions]="[10, 20, 30]" />
+</div>
