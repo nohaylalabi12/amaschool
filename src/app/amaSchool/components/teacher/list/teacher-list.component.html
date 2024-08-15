@@ -10,26 +10,27 @@
         <ng-template pTemplate="caption">
             <form [formGroup]="searchForm" (ngSubmit)="applySearch()">
                 <div class="flex flex-wrap gap-2 align-items-center justify-content-between">
-                    <span class="p-input-icon-left w-full sm:w-20rem flex-order-1 sm:flex-order-0">
-                        <input pInputText type="text" placeholder="Search by Code" class="w-full" formControlName="teacherCode"/>
-                        <i class="pi pi-search"></i>
+                    <span class="p-input-icon-left w-full sm:w-15rem flex-order-1 sm:flex-order-0">
+                        <input pInputText type="text" placeholder="Search by Code" class="w-full" formControlName="teacherCode" style="padding: 0.7rem 0.5rem;"/>
+
                     </span>
-                    <span class="p-input-icon-left w-full sm:w-20rem flex-order-1 sm:flex-order-0">
-                        <input pInputText type="text" placeholder="Search by First Name" class="w-full" formControlName="firstName"/>
-                        <i class="pi pi-search"></i>
+
+                    <span class="p-input-icon-left w-full sm:w-15rem flex-order-1 sm:flex-order-0">
+                        <input pInputText type="text" placeholder="Search by First Name" class="w-full" formControlName="firstName" style="padding: 0.7rem 0.5rem;"/>
+
                     </span>
-                    <span class="p-input-icon-left w-full sm:w-20rem flex-order-1 sm:flex-order-0">
-                        <input pInputText type="text" placeholder="Search by Last Name" class="w-full" formControlName="lastName"/>
-                        <i class="pi pi-search"></i>
+                    <span class="p-input-icon-left w-full sm:w-15rem flex-order-1 sm:flex-order-0">
+                        <input pInputText type="text" placeholder="Search by Last Name" class="w-full" formControlName="lastName" style="padding: 0.7rem 0.5rem;"/>
+
                     </span>
-                    <span class="p-input-icon-left w-full sm:w-20rem flex-order-1 sm:flex-order-0">
-                        <input pInputText type="text" placeholder="Search by CIN" class="w-full" formControlName="cin"/>
-                        <i class="pi pi-search"></i>
+                    <span class=" w-full sm:w-15rem flex-order-1 sm:flex-order-0">
+                        <input pInputText type="text" placeholder="Search by CIN" class="w-full" formControlName="cin" style="padding: 0.7rem 0.5rem;"/>
+
                     </span>
                     <div class="flex flex-wrap gap-2 align-items-center justify-content-around">
-                        <button type="submit" pButton label="Search" icon="pi pi-search" class="p-button-outlined w-full sm:w-auto flex-order-0 sm:flex-order-1"></button>
+                        <button type="submit" pButton  icon="pi pi-search" class="p-button-outlined w-full sm:w-auto flex-order-2 sm:flex-order-1"></button>
                         <button (click)="navigateToCreateTeacher()" pButton class="p-button-outlined w-full sm:w-auto flex-order-0 sm:flex-order-1" icon="pi pi-plus" label="Add"></button>
-                        <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="dt.exportCSV()"></button>
+                        <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help flex-order-2" (click)="dt.exportCSV()"></button>
                     </div>
                 </div>
             </form>

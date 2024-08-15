@@ -77,8 +77,22 @@ export class TeacherService {
     );
   }
 
-  getTeacherByFirstName(firstName: string): Observable<{ teachers: TeacherResponse[], totalElements: number }> {
-    let params = new HttpParams().append('firstName', firstName);
+  getTeachersByCriteria(criteria: { teacherCode?: string, firstName?: string, lastName?: string, cin?: string }): Observable<{ teachers: TeacherResponse[], totalElements: number }> {
+    let params = new HttpParams();
+
+
+    if (criteria.teacherCode) {
+      params = params.append('teacherCode', criteria.teacherCode);
+    }
+    if (criteria.firstName) {
+      params = params.append('firstName', criteria.firstName);
+    }
+    if (criteria.lastName) {
+      params = params.append('lastName', criteria.lastName);
+    }
+    if (criteria.cin) {
+      params = params.append('cin', criteria.cin);
+    }
 
     return this.http.get<any>(this.apiUrl, { params }).pipe(
       map(response => {
@@ -95,41 +109,6 @@ export class TeacherService {
     );
   }
 
-  getTeacherByLastName(lastName: string): Observable<{ teachers: TeacherResponse[], totalElements: number }> {
-    let params = new HttpParams().append('lastName', lastName);
-
-    return this.http.get<any>(this.apiUrl, { params }).pipe(
-      map(response => {
-        const teachers: TeacherResponse[] = response.content.map((teacher: any) => ({
-          ...teacher,
-          specialty: {
-            specialtyName: teacher.specialty?.name || '',
-            specialtyCode: teacher.specialty?.specialtyCode || ''
-          }
-        }));
-        const totalElements: number = response.totalElements;
-        return { teachers, totalElements };
-      })
-    );
-  }
-
-  getTeacherByCin(cin: string): Observable<{ teachers: TeacherResponse[], totalElements: number }> {
-    let params = new HttpParams().append('cin', cin);
-
-    return this.http.get<any>(this.apiUrl, { params }).pipe(
-      map(response => {
-        const teachers: TeacherResponse[] = response.content.map((teacher: any) => ({
-          ...teacher,
-          specialty: {
-            specialtyName: teacher.specialty?.name || '',
-            specialtyCode: teacher.specialty?.specialtyCode || ''
-          }
-        }));
-        const totalElements: number = response.totalElements;
-        return { teachers, totalElements };
-      })
-    );
-  }
 
 
   // Method to add a new teacher

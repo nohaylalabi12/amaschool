@@ -122,46 +122,6 @@ export class TeacherListComponent implements OnInit {
     );
   }
 
-  searchTeacherByCode(): void {
-    const teacherCode = this.searchForm.get('teacherCode')?.value;
-    if (teacherCode) {
-      this.teacherService.getTeacherByCode(teacherCode).subscribe(content => {
-        this.teachers = content.teachers;
-        this.totalElements = content.totalElements;
-      });
-    }
-  }
-
-  searchTeacherByFirstName(): void {
-    const firstName = this.searchForm.get('firstName')?.value;
-    if (firstName) {
-      this.teacherService.getTeacherByFirstName(firstName).subscribe(content => {
-        this.teachers = content.teachers;
-        this.totalElements = content.totalElements;
-      });
-    }
-  }
-
-  searchTeacherByLastName(): void {
-    const lastName = this.searchForm.get('lastName')?.value;
-    if (lastName) {
-      this.teacherService.getTeacherByLastName(lastName).subscribe(content => {
-        this.teachers = content.teachers;
-        this.totalElements = content.totalElements;
-      });
-    }
-  }
-
-  searchTeacherByCin(): void {
-    const cin = this.searchForm.get('cin')?.value;
-    if (cin) {
-      this.teacherService.getTeacherByCin(cin).subscribe(content => {
-        this.teachers = content.teachers;
-        this.totalElements = content.totalElements;
-      });
-    }
-  }
-
   applySearch(): void {
     const teacherCode = this.searchForm.get('teacherCode')?.value;
     const firstName = this.searchForm.get('firstName')?.value;
@@ -170,16 +130,11 @@ export class TeacherListComponent implements OnInit {
 
     console.log('Search triggered with:', { teacherCode, firstName, lastName, cin }); // Debugging
 
-    if (teacherCode) {
-      this.searchTeacherByCode();
-    } else if (firstName) {
-      this.searchTeacherByFirstName();
-    } else if (lastName) {
-      this.searchTeacherByLastName();
-    } else if (cin) {
-      this.searchTeacherByCin();
-    } else {
-      this.loadTeachers(0, 10);
-    }
+    const criteria = { teacherCode, firstName, lastName, cin };
+
+    this.teacherService.getTeachersByCriteria(criteria).subscribe(response => {
+      this.teachers = response.teachers;
+      this.totalElements = response.totalElements;
+    });
   }
 }

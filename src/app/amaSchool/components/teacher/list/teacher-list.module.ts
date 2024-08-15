@@ -33,7 +33,7 @@ import { ToastModule } from 'primeng/toast';
         ReactiveFormsModule,
         DialogModule,
         PaginatorModule,
-        ToastModule
+        ToastModule,
     ],
     declarations: [TeacherListComponent]
 })
