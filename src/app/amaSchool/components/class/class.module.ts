@@ -1,12 +1,17 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {ClassRoutingModule} from "./class-routing.module";
+import { NgModule } from '@angular/core';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ClassRoutingModule } from "./class-routing.module";
 
 @NgModule({
     imports: [
+       
         CommonModule,
-        ClassRoutingModule
+        ClassRoutingModule,
+        MultiSelectModule,
     ],
-    declarations: []
+    declarations: [],
+    // schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
 })
 export class ClassModule { }

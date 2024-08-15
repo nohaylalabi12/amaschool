@@ -8,15 +8,14 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { MultiSelectModule } from 'primeng/multiselect';
 import { RippleModule } from 'primeng/ripple';
-import { ClassUpdateRoutingModule } from "./class-update-routing.module";
-import { ClassUpdateComponent } from "./class-update.component";
+import { ClassDeleteRoutingModule } from "./class-delete-routing.module";
+import { ClassDeleteComponent } from "./class-delete.component";
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
-        ClassUpdateRoutingModule,
+        ClassDeleteRoutingModule,
         ButtonModule,
         RippleModule,
         InputTextModule,
@@ -25,9 +24,8 @@ import { ClassUpdateComponent } from "./class-update.component";
         InputTextareaModule,
         InputGroupModule,
         InputGroupAddonModule,
-        ReactiveFormsModule,
-        MultiSelectModule
+        ReactiveFormsModule
     ],
-    declarations: [ClassUpdateComponent]
+    declarations: [ClassDeleteComponent]
 })
-export class ClassUpdateModule { }
+export class ClassDeleteModule { }

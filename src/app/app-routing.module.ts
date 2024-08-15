@@ -12,7 +12,9 @@ const routes: Routes = [
         children: [
             { path: '', loadChildren: () => import('./amaSchool/components/dashboards/dashboards.module').then(m => m.DashboardsModule) },
             { path: 'grades', loadChildren: () => import('./amaSchool/components/grade/grade.module').then(m => m.GradeModule) },
-            { path: 'classe', loadChildren: () => import('./amaSchool/components/class/class.module').then(m => m.ClassModule) },
+            { path: 'class', loadChildren: () => import('./amaSchool/components/class/class.module').then(m => m.ClassModule) },
+            // { path: 'course', loadChildren: () => import('./amaSchool/components/course/course.module').then(m => m.CourseModule) },
+            
         ]
     },
     { path: 'auth', data: { breadcrumb: 'Auth' }, loadChildren: () => import('./amaSchool/components/auth/auth.module').then(m => m.AuthModule) },

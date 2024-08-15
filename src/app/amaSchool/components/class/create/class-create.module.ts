@@ -1,16 +1,17 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { RippleModule } from 'primeng/ripple';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
-import { InputTextareaModule } from 'primeng/inputtextarea';
-import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputGroupModule } from 'primeng/inputgroup';
-import {ClassCreateComponent} from "./class-create.component";
-import {ClassCreateRoutingModule} from "./class-create-routing.module";
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { RippleModule } from 'primeng/ripple';
+import { ClassCreateRoutingModule } from "./class-create-routing.module";
+import { ClassCreateComponent } from "./class-create.component";
 @NgModule({
     imports: [
         CommonModule,
@@ -24,7 +25,8 @@ import {ClassCreateRoutingModule} from "./class-create-routing.module";
         InputTextareaModule,
         InputGroupModule,
         InputGroupAddonModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MultiSelectModule
     ],
     declarations: [ClassCreateComponent]
 })

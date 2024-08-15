@@ -1,5 +1,4 @@
-import { OnInit } from '@angular/core';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-menu',
@@ -40,23 +39,42 @@ export class AppMenuComponent implements OnInit {
                         label: 'Create',
                         icon: 'pi pi-fw pi-plus',
                         routerLink: ['grades/create']
-                    }
+                    },
+                   
+                ]
+            },
+            {
+                label: 'Classes',
+                icon: 'pi pi-fw pi-clone',
+                items: [
+                    {
+                        label: 'List',
+                        icon: 'pi pi-fw pi-list',
+                        routerLink: ['class/list']
+                    },
+                    {
+                        label: 'Create',
+                        icon: 'pi pi-fw pi-plus',
+                        routerLink: ['class/create']
+                    },
+           
                 ]
             },
             // {
-            //     label: 'Classes',
+            //     label: 'Courses',
             //     icon: 'pi pi-fw pi-clone',
             //     items: [
             //         {
             //             label: 'List',
             //             icon: 'pi pi-fw pi-list',
-            //             routerLink: ['classe/list']
+            //             routerLink: ['course/list']
             //         },
             //         {
             //             label: 'Create',
             //             icon: 'pi pi-fw pi-plus',
-            //             routerLink: ['classe/create']
-            //         }
+            //             routerLink: ['course/create']
+            //         },
+         
             //     ]
             // },
         ];

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Grade} from "../../../models/grade";
-import {GradeService} from "../../../service/grade.service";
-import {Router} from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Router } from "@angular/router";
+import { Grade } from "../../../models/grade";
+import { GradeService } from "../../../service/grade.service";
 
 @Component({
   selector: 'app-grade-create',

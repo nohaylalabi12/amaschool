@@ -1,82 +1,83 @@
 <p-toast key="tst2"></p-toast>
 <p-toast key="tst3"></p-toast>
-<div> <span class="text-900 font-medium text-4xl mb-4 ">List of</span><span class="text-primary font-medium text-4xl mb-4 "> Classes</span></div>
+
+<div>
+    <span class="text-900 font-medium text-4xl mb-4">List of</span>
+    <span class="text-primary font-medium text-4xl mb-4"> Classes</span>
+</div>
 <br>
-<p-progressBar *ngIf="classes === undefined || classes.length === 0" mode="indeterminate" [style]="{ height: '6px' }"  />
-<div class="card" *ngIf="classes !== undefined">
+
+@if (classes.length === 0) {
+  <p-progressBar mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
+}
+
+@if (classes.length > 0) {
+  <div class="card">
     <p-messages [value]="msgs"></p-messages>
     <p-table #dt [value]="classes" [paginator]="false" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
-             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]"
-
-    >
-
+             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]">
         <ng-template pTemplate="caption">
-            <form [formGroup]="searchForm" >
-                <div class="flex flex-wrap gap-2 align-items-center justify-content-between">
-                <span class="p-input-icon-left w-full sm:w-20rem flex-order-1 sm:flex-order-0">
+            <form [formGroup]="searchForm" (ngSubmit)="searchClass()">
+                <div class="flex flex-wrap gap-2 align-items-center ">
+                    <span class="class= w-full sm:w-18rem flex-order-1 sm:flex-order-0">
+                        <input pInputText type="text" placeholder="Search by code" class="w-full m-0" formControlName="classeCode" />
+                    </span>
+                    <span class="w-full sm:w-18rem flex-order-1 sm:flex-order-0">
+                        <input pInputText type="text" placeholder="Search by name" class="w-full m-0" formControlName="name" />
+                    </span>
+                    <button pButton type="submit" label="" icon="pi pi-search"></button>
 
-                    <input pInputText type="text"  placeholder="Search by code" class="w-full" formControlName="classeCode" (change)="searchClassByCode()"/>
-                     <i class="pi pi-search"></i>
-                </span>
-                    <div class="flex flex-wrap gap-2 align-items-center justify-content-around">
+                    <div class="flex flex-wrap gap-2 ml-auto">
                         <button (click)="navigateToCreateClasse()" pButton class="p-button-outlined w-full sm:w-auto flex-order-0 sm:flex-order-1" icon="pi pi-plus" label="Add"></button>
                         <button pButton pRipple label="Export" icon="pi pi-upload" class="p-button-help" (click)="dt.exportCSV()"></button>
                     </div>
                 </div>
             </form>
         </ng-template>
+
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="Code" class="white-space-nowrap" style="width:25%">Code <p-sortIcon field="Code"></p-sortIcon></th>
-                <th pSortableColumn="Name" class="white-space-nowrap" style="width:25%">Name <p-sortIcon field="Name"></p-sortIcon></th>
-                <th pSortableColumn="Description" class="white-space-nowrap" style="width:10%; text-align: center;">Capacity <p-sortIcon field="Description"></p-sortIcon></th>
-                <th pSortableColumn="Description" class="white-space-nowrap" style="width:15%">Student count <p-sortIcon field="Description"></p-sortIcon></th>
-                <th pSortableColumn="Description" class="white-space-nowrap" style="width:20%">Grade <p-sortIcon field="Description"></p-sortIcon></th>
-                <th  class="white-space-nowrap" style="width:25%"></th>
-                <th  class="white-space-nowrap" style="width:25%"></th>
-                <th  class="white-space-nowrap" style="width:25%"></th>
+                <th pSortableColumn="classeCode" class="white-space-nowrap" style="width:25%">Code <p-sortIcon field="classeCode"></p-sortIcon></th>
+                <th pSortableColumn="name" class="white-space-nowrap" style="width:25%">Name <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="studentLimit" class="white-space-nowrap" style="width:10%; text-align: center;">Capacity <p-sortIcon field="studentLimit"></p-sortIcon></th>
+                <th pSortableColumn="Student Count" class="white-space-nowrap" style="width:15%">Student count <p-sortIcon field="Student Count"></p-sortIcon></th>
+                <th pSortableColumn="grade.name" class="white-space-nowrap" style="width:20%">Grade <p-sortIcon field="grade.name"></p-sortIcon></th>
+                <th class="white-space-nowrap" style="width:50%"></th>
+                <th class="white-space-nowrap" style="width:25%"></th>
+                <th class="white-space-nowrap" style="width:25%"></th>
             </tr>
         </ng-template>
+
         <ng-template pTemplate="body" let-classe>
             <tr>
                 <td>{{classe.classeCode}}</td>
                 <td>{{classe.name}}</td>
                 <td style="text-align: center;">{{classe.studentLimit}}</td>
                 <td>
-                    <p-progressBar [value]="(classe.currentStudents / classe.studentLimit) * 100"  [style]="{'height':'.5rem','width':'10rem'}">
-                        <span>1</span>
-                    </p-progressBar>
-
+                    <p-progressBar [value]="(classe.currentStudents / classe.studentLimit) * 100" [style]="{'height':'.5rem','width':'10rem'}"></p-progressBar>
                 </td>
                 <td>{{classe.grade.name}}</td>
                 <td style="text-align: center;">
-                    <button pButton pRipple type="button" icon="pi pi-eye" class="p-button-rounded p-button-text p-button-plain" (click)="navigateToDetails(classe.classeCode)"></button></td>
+                    <button pButton pRipple type="button" icon="pi pi-eye" class="p-button-rounded p-button-text p-button-outlined" (click)="navigateToDetails(classe.classeCode)"></button>
+                </td>
                 <td>
-                    <p-dialog header="Confirmation"  [(visible)]="displayDialog[classe.classeCode]" [modal]="true" showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px': '75vw'}" >
-                        <p  class="line-height-3 m-0">
-                            <i class="pi pi-exclamation-triangle" style="font-size: 25px"></i>   Are you sure You want to delete the class {{classe.classeCode}}
+                    <p-dialog header="Confirmation" [(visible)]="displayDialog[classe.classeCode]" [modal]="true" showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px': '75vw'}">
+                        <p class="line-height-3 m-0">
+                            <i class="pi pi-exclamation-triangle" style="font-size: 25px"></i> Are you sure You want to delete the class {{classe.classeCode}}
                         </p>
                         <ng-template pTemplate="footer">
                             <button pButton icon="pi pi-check" (click)="deleteClasse(classe.classeCode)" label="Yes" class="p-button-outlined"></button>
                         </ng-template>
                     </p-dialog>
-                    <button (click)="displayDialog[classe.classeCode]=true" pButton icon="pi pi-times" class="p-button-rounded p-button-danger p-button-outlined" ></button>
+                    <button (click)="displayDialog[classe.classeCode]=true" pButton icon="pi pi-times" class="p-button-rounded p-button-danger p-button-outlined"></button>
                 </td>
                 <td>
                     <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success p-button-outlined" (click)="navigateToUpdateClasse(classe.classeCode)"></button>
                 </td>
-
-
-
             </tr>
         </ng-template>
     </p-table>
 
-    <!--    (onPageChange)="onPageChange($event)"-->
-    <p-paginator
-            (onPageChange)="onPageChange($event)"
-            [first]="0"
-            [rows]="10"
-            [totalRecords]="totalElements"
-            [rowsPerPageOptions]="[10, 20, 30]" />
-</div>
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="0" [rows]="10" [totalRecords]="totalElements" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+  </div>
+}

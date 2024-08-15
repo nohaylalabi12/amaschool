@@ -1,9 +1,9 @@
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
-import {catchError, concatMap, map, toArray} from "rxjs/operators";
-import {Grade} from "../models/grade";
-import {from, Observable, of} from "rxjs";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { environment } from "../../../environments/environment";
+import { Grade } from "../models/grade";
 
 @Injectable({
   providedIn: 'root'
