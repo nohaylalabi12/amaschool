@@ -77,21 +77,37 @@ export class AppMenuComponent implements OnInit {
             //     ]
             // },
             {
+<<<<<<< HEAD
                 label: 'Teachers',
+=======
+                label: 'Teacher Specialties',
+>>>>>>> origin/feature_specialite_enseignant
                 icon: 'pi pi-fw pi-bars',
                 items: [
                     {
                         label: 'List',
                         icon: 'pi pi-fw pi-list',
+<<<<<<< HEAD
                         routerLink: ['teachers/list']
+=======
+                        routerLink: ['teacher-specialty/list']
+>>>>>>> origin/feature_specialite_enseignant
                     },
                     {
                         label: 'Create',
                         icon: 'pi pi-fw pi-plus',
+<<<<<<< HEAD
                         routerLink: ['teachers/create']
                     }
                 ]
             },
+=======
+                        routerLink: ['teacher-specialty/create']
+                    }
+                ]
+            },
+
+>>>>>>> origin/feature_specialite_enseignant
         ];
     }
 }
