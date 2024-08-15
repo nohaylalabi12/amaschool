@@ -43,6 +43,7 @@ export class AppMenuComponent implements OnInit {
                     }
                 ]
             },
+           
             // {
             //     label: 'Classes',
             //     icon: 'pi pi-fw pi-clone',
@@ -59,6 +60,22 @@ export class AppMenuComponent implements OnInit {
             //         }
             //     ]
             // },
+            {
+                label: 'Administrative Staff',
+                icon: 'pi pi-fw pi-bars',
+                items: [
+                    {
+                        label: 'List',
+                        icon: 'pi pi-fw pi-list',
+                        routerLink: ['administrative-staff/list']
+                    },
+                    {
+                        label: 'Create',
+                        icon: 'pi pi-fw pi-plus',
+                        routerLink: ['administrative-staff/create']
+                    }
+                ]
+            },
         ];
     }
 }

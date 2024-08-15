@@ -1,0 +1,42 @@
+<div class="col-10 mx-auto">
+    <div class="card">
+        <span class="text-900 text-xl font-bold mb-4 block">Create Administrative Staff</span>
+        <form [formGroup]="administrativeStaffForm" (ngSubmit)="createAdministrativeStaff()">
+            <div class="grid">
+                <div class="col-12 lg:col-0"></div>
+                <div class="col-12 lg:col-12">
+                    <div class="grid formgrid p-fluid">
+                        <div class="field mb-4 col-12 md:col-6">
+                            <label for="firstName" class="font-medium text-900">First Name</label>
+                            <input id="firstName" type="text" pInputText formControlName="firstName">
+                            <small class="ng-dirty ng-invalid" *ngIf="administrativeStaffForm.get('firstName')!.hasError('required') && (administrativeStaffForm.get('firstName')!.dirty || administrativeStaffForm.get('firstName')!.touched)">First Name is required.</small>
+                        </div>
+                        <div class="field mb-4 col-12 md:col-6">
+                            <label for="lastName" class="font-medium text-900">Last Name</label>
+                            <input id="lastName" type="text" pInputText formControlName="lastName">
+                            <small class="ng-dirty ng-invalid" *ngIf="administrativeStaffForm.get('lastName')!.hasError('required') && (administrativeStaffForm.get('lastName')!.dirty || administrativeStaffForm.get('lastName')!.touched)">Last Name is required.</small>
+                        </div>
+                        <div class="field mb-4 col-12 md:col-6">
+                            <label for="email" class="font-medium text-900">Email</label>
+                            <input id="email" type="email" pInputText formControlName="email">
+                            <small class="ng-dirty ng-invalid" *ngIf="administrativeStaffForm.get('email')!.hasError('required') && (administrativeStaffForm.get('email')!.dirty || administrativeStaffForm.get('email')!.touched)">Email is required.</small>
+                        </div>
+                        <div class="field mb-4 col-12 md:col-6">
+                            <label for="phone" class="font-medium text-900">Phone</label>
+                            <input id="phone" type="text" pInputText formControlName="phone">
+                            <small class="ng-dirty ng-invalid" *ngIf="administrativeStaffForm.get('phone')!.hasError('required') && (administrativeStaffForm.get('phone')!.dirty || administrativeStaffForm.get('phone')!.touched)">Phone is required.</small>
+                        </div>
+                        <div class="field mb-4 col-12 md:col-6">
+                            <label for="role" class="font-medium text-900">Role</label>
+                            <input id="role" type="text" pInputText formControlName="role">
+                            <small class="ng-dirty ng-invalid" *ngIf="administrativeStaffForm.get('role')!.hasError('required') && (administrativeStaffForm.get('role')!.dirty || administrativeStaffForm.get('role')!.touched)">Role is required.</small>
+                        </div>
+                        <div class="col-12">
+                            <button pButton pRipple label="Create" type="submit" class="w-auto mt-3" [disabled]="administrativeStaffForm.invalid"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
