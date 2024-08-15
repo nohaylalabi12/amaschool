@@ -40,7 +40,7 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-plus',
                         routerLink: ['grades/create']
                     },
-                   
+
                 ]
             },
             {
@@ -57,10 +57,9 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-plus',
                         routerLink: ['class/create']
                     },
-           
+
                 ]
             },
-<<<<<<< HEAD
             {
                 label: 'Students',
                 icon: 'pi pi-fw pi-bars',
@@ -78,7 +77,7 @@ export class AppMenuComponent implements OnInit {
 
                 ]
             },
-=======
+
                {
                 label: 'Rooms',
                               icon: 'pi pi-fw pi-bars',
@@ -97,7 +96,7 @@ export class AppMenuComponent implements OnInit {
                           },
 
 
->>>>>>> origin/feature_salle
+
             // {
             //     label: 'Courses',
             //     icon: 'pi pi-fw pi-clone',
@@ -112,41 +111,58 @@ export class AppMenuComponent implements OnInit {
             //             icon: 'pi pi-fw pi-plus',
             //             routerLink: ['course/create']
             //         },
-         
+
             //     ]
             // },
             {
-<<<<<<< HEAD
-                label: 'Teachers',
-=======
-                label: 'Teacher Specialties',
->>>>>>> origin/feature_specialite_enseignant
+                label: 'Administrative Staff',
                 icon: 'pi pi-fw pi-bars',
                 items: [
                     {
                         label: 'List',
                         icon: 'pi pi-fw pi-list',
-<<<<<<< HEAD
-                        routerLink: ['teachers/list']
-=======
-                        routerLink: ['teacher-specialty/list']
->>>>>>> origin/feature_specialite_enseignant
+                        routerLink: ['administrative-staff/list']
                     },
                     {
                         label: 'Create',
                         icon: 'pi pi-fw pi-plus',
-<<<<<<< HEAD
-                        routerLink: ['teachers/create']
+                        routerLink: ['administrative-staff/create']
                     }
                 ]
             },
-=======
+            {
+                label: 'Teacher Specialties',
+                icon: 'pi pi-fw pi-bars',
+                items: [
+                    {
+                        label: 'List',
+                        icon: 'pi pi-fw pi-list',
+                        routerLink: ['teacher-specialty/list']
+                    },
+                    {
+                        label: 'Create',
+                        icon: 'pi pi-fw pi-plus',
                         routerLink: ['teacher-specialty/create']
                     }
                 ]
             },
+            {
+                label: 'Teachers',
+                icon: 'pi pi-fw pi-bars',
+                items: [
+                    {
+                        label: 'List',
+                        icon: 'pi pi-fw pi-list',
+                        routerLink: ['teachers/list']
+                    },
+                    {
+                        label: 'Create',
+                        icon: 'pi pi-fw pi-plus',
+                        routerLink: ['teachers/create']
+                    }
+                ]
+            },
 
->>>>>>> origin/feature_specialite_enseignant
         ];
     }
 }
