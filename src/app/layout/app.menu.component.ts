@@ -76,6 +76,22 @@ export class AppMenuComponent implements OnInit {
             //         }
             //     ]
             // },
+            {
+                label: 'Teachers',
+                icon: 'pi pi-fw pi-bars',
+                items: [
+                    {
+                        label: 'List',
+                        icon: 'pi pi-fw pi-list',
+                        routerLink: ['teachers/list']
+                    },
+                    {
+                        label: 'Create',
+                        icon: 'pi pi-fw pi-plus',
+                        routerLink: ['teachers/create']
+                    }
+                ]
+            },
         ];
     }
 }
