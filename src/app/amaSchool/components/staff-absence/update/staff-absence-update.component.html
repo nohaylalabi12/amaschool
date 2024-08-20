@@ -1,0 +1,55 @@
+<div class="col-10 mx-auto">
+    <div class="card">
+        <span class="text-900 text-xl font-bold mb-4 block">Update Staff Absence</span>
+        <form [formGroup]="absenceForm" (ngSubmit)="updateAbsence()">
+            <div class="grid">
+                <div class="col-12 lg:col-0"></div>
+                <div class="col-12 lg:col-12">
+                    <div class="grid formgrid p-fluid">
+
+                        <!-- Staff Code -->
+                        <div class="field mb-4 col-12 md:col-6">
+                            <label for="administrativeStaffCode" class="font-medium text-900">Staff Code</label>
+                            <input id="administrativeStaffCode" type="text" pInputText formControlName="administrativeStaffCode" readonly>
+                            <small *ngIf="absenceForm.get('administrativeStaffCode')?.hasError('required') && (absenceForm.get('administrativeStaffCode')?.dirty || absenceForm.get('administrativeStaffCode')?.touched)">Staff Code is required.</small>
+                        </div>
+
+                        <!-- Absence Date -->
+                        <div class="field mb-4 col-12 md:col-6">
+                            <label for="absenceDate" class="font-medium text-900">Absence Date</label>
+                            <p-calendar id="absenceDate" formControlName="absenceDate" [showIcon]="true" dateFormat="yy-mm-dd"></p-calendar>
+                            <small *ngIf="absenceForm.get('absenceDate')?.hasError('required') && (absenceForm.get('absenceDate')?.dirty || absenceForm.get('absenceDate')?.touched)">Absence Date is required.</small>
+                        </div>
+
+                        <!-- Start Time -->
+                        <div class="field mb-4 col-12 md:col-6">
+                            <label for="startTime" class="font-medium text-900">Start Time</label>
+                            <p-calendar id="startTime" formControlName="startTime" [timeOnly]="true" [showIcon]="true" hourFormat="24"></p-calendar>
+                            <small *ngIf="absenceForm.get('startTime')?.hasError('required') && (absenceForm.get('startTime')?.dirty || absenceForm.get('startTime')?.touched)">Start Time is required.</small>
+                        </div>
+
+                        <!-- End Time -->
+                        <div class="field mb-4 col-12 md:col-6">
+                            <label for="endTime" class="font-medium text-900">End Time</label>
+                            <p-calendar id="endTime" formControlName="endTime" [timeOnly]="true" [showIcon]="true" hourFormat="24"></p-calendar>
+                            <small *ngIf="absenceForm.get('endTime')?.hasError('required') && (absenceForm.get('endTime')?.dirty || absenceForm.get('endTime')?.touched)">End Time is required.</small>
+                        </div>
+
+                        <!-- Absence Cause -->
+                        <div class="field mb-4 col-12">
+                            <label for="absenceCause" class="font-medium text-900">Absence Cause</label>
+                            <input id="absenceCause" type="text" pInputText formControlName="absenceCause">
+                            <small *ngIf="absenceForm.get('absenceCause')?.hasError('required') && (absenceForm.get('absenceCause')?.dirty || absenceForm.get('absenceCause')?.touched)">Absence Cause is required.</small>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="col-12">
+                            <button pButton pRipple label="Update" type="submit" class="w-auto mt-3"></button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

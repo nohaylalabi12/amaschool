@@ -9,18 +9,16 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputGroupModule } from 'primeng/inputgroup';
-import { AdministrativeStaffListComponent } from './administrative-staff-list.component';
-import { AdministrativeStaffListRoutingModule } from './administrative-staff-list-routing.module';
-import { DialogModule } from 'primeng/dialog';
-import { PaginatorModule } from 'primeng/paginator';
-import { TableModule } from 'primeng/table';
+import { StaffAbsenceCreateComponent } from './staff-absence-create.component';
+import { CalendarModule } from 'primeng/calendar';
+import { StaffAbsenceCreateRoutingModule } from './staff-absence-create-routing.module';
 import { ToastModule } from 'primeng/toast';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
-        AdministrativeStaffListRoutingModule,
+        StaffAbsenceCreateRoutingModule,
         ButtonModule,
         RippleModule,
         InputTextModule,
@@ -29,12 +27,10 @@ import { ToastModule } from 'primeng/toast';
         InputTextareaModule,
         InputGroupModule,
         InputGroupAddonModule,
-        ReactiveFormsModule,
-        DialogModule,
-        PaginatorModule,
-        TableModule,
-        ToastModule
+        CalendarModule,
+        ToastModule,
+        ReactiveFormsModule
     ],
-    declarations: [AdministrativeStaffListComponent]
+    declarations: [StaffAbsenceCreateComponent]
 })
-export class AdministrativeStaffListModule { }
+export class StaffAbsenceCreateModule { }

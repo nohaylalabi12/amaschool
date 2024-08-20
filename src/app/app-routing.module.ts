@@ -18,7 +18,11 @@ const routes: Routes = [
              { path: 'rooms', loadChildren: () => import('./amaSchool/components/room/room.module').then(m => m.RoomModule) },
             { path: 'class', loadChildren: () => import('./amaSchool/components/class/class.module').then(m => m.ClassModule) },
             // { path: 'course', loadChildren: () => import('./amaSchool/components/course/course.module').then(m => m.CourseModule) },
+        
             { path: 'administrative-staff', loadChildren: () => import('./amaSchool/components/administrative-staff/administrative-staff.module').then(m => m.AdministrativeStaffModule) },
+            // Ajout des routes pour la gestion des absences du personnel administratif
+            { path: 'staff-absence', loadChildren: () => import('./amaSchool/components/staff-absence/staff-absence.module').then(m => m.StaffAbsenceModule) },
+
         ]
     },
     { path: 'auth', data: { breadcrumb: 'Auth' }, loadChildren: () => import('./amaSchool/components/auth/auth.module').then(m => m.AuthModule) },

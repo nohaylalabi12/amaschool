@@ -162,6 +162,22 @@ export class AppMenuComponent implements OnInit {
                     }
                 ]
             },
+            {
+                label: 'Staff Absences', // Nouveau
+                icon: 'pi pi-fw pi-calendar',
+                items: [
+                    {
+                        label: 'List',
+                        icon: 'pi pi-fw pi-list',
+                        routerLink: ['staff-absence/list']
+                    },
+                    {
+                        label: 'Create',
+                        icon: 'pi pi-fw pi-plus',
+                        routerLink: ['staff-absence/create']
+                    }
+                ]
+            },
 
         ];
     }

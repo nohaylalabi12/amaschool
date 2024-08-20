@@ -1,0 +1,100 @@
+<p-toast></p-toast>
+<div class="col-10 mx-auto">
+  <div class="card">
+    <span class="text-900 text-xl font-bold mb-4 block">Create Staff Absence</span>
+    <form [formGroup]="staffAbsenceForm" (ngSubmit)="createStaffAbsence()">
+      <div class="grid">
+        <div class="col-12 lg:col-12">
+          <div class="grid formgrid p-fluid">
+
+            <!-- Staff Dropdown -->
+            <div class="field mb-4 col-12 md:col-6">
+              <label for="administrativeStaffCode" class="font-medium text-900">Staff</label>
+              <p-dropdown
+                inputId="administrativeStaffCode"
+                [options]="staffs"
+                formControlName="administrativeStaffCode"
+                [filter]="true"
+                filterBy="label"
+                [showClear]="true">
+              </p-dropdown>
+              <small *ngIf="staffAbsenceForm.get('administrativeStaffCode')?.hasError('required') && (staffAbsenceForm.get('administrativeStaffCode')?.dirty || staffAbsenceForm.get('administrativeStaffCode')?.touched)" class="ng-dirty ng-invalid">
+                Staff is required.
+              </small>
+            </div>
+
+            <!-- Absence Date -->
+            <div class="field mb-4 col-12 md:col-6">
+              <label for="absenceDate" class="font-medium text-900">Absence Date</label>
+              <p-calendar
+                inputId="absenceDate"
+                formControlName="absenceDate"
+                placeholder="Select Date"
+                dateFormat="yy-mm-dd">
+              </p-calendar>
+              <small *ngIf="staffAbsenceForm.get('absenceDate')?.hasError('required') && (staffAbsenceForm.get('absenceDate')?.dirty || staffAbsenceForm.get('absenceDate')?.touched)" class="ng-dirty ng-invalid">
+                Absence Date is required.
+              </small>
+            </div>
+
+            <!-- Absence Cause -->
+            <div class="field mb-4 col-12">
+              <label for="absenceCause" class="font-medium text-900">Absence Cause</label>
+              <input id="absenceCause" type="text" pInputText formControlName="absenceCause" placeholder="Enter Absence Cause">
+              <small *ngIf="staffAbsenceForm.get('absenceCause')?.hasError('required') && (staffAbsenceForm.get('absenceCause')?.dirty || staffAbsenceForm.get('absenceCause')?.touched)" class="ng-dirty ng-invalid">
+                Absence Cause is required.
+              </small>
+            </div>
+
+            <!-- Start Time -->
+            <div class="field mb-4 col-12 md:col-6">
+              <label for="startTime" class="font-medium text-900">Start Time</label>
+              <p-calendar
+                inputId="startTime"
+                formControlName="startTime"
+                [timeOnly]="true"
+                hourFormat="24">
+              </p-calendar>
+              <small *ngIf="staffAbsenceForm.get('startTime')?.hasError('required') && (staffAbsenceForm.get('startTime')?.dirty || staffAbsenceForm.get('startTime')?.touched)" class="ng-dirty ng-invalid">
+                Start Time is required.
+              </small>
+            </div>
+
+            <!-- End Time -->
+            <div class="field mb-4 col-12 md:col-6">
+              <label for="endTime" class="font-medium text-900">End Time</label>
+              <p-calendar
+                inputId="endTime"
+                formControlName="endTime"
+                [timeOnly]="true"
+                hourFormat="24">
+              </p-calendar>
+              <small *ngIf="staffAbsenceForm.get('endTime')?.hasError('required') && (staffAbsenceForm.get('endTime')?.dirty || staffAbsenceForm.get('endTime')?.touched)" class="ng-dirty ng-invalid">
+                End Time is required.
+              </small>
+            </div>
+
+            <!-- Absence Status -->
+            <div class="field mb-4 col-12 md:col-6">
+              <label for="absenceStatus" class="font-medium text-900">Absence Status</label>
+              <p-dropdown
+                inputId="absenceStatus"
+                [options]="absenceStatusOptions"
+                formControlName="absenceStatus">
+              </p-dropdown>
+              <small *ngIf="staffAbsenceForm.get('absenceStatus')?.hasError('required') && (staffAbsenceForm.get('absenceStatus')?.dirty || staffAbsenceForm.get('absenceStatus')?.touched)" class="ng-dirty ng-invalid">
+                Absence Status is required.
+              </small>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="col-12">
+              <button pButton pRipple label="Create" type="submit" class="w-auto mt-3" [disabled]="staffAbsenceForm.invalid"></button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
