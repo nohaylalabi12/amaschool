@@ -86,4 +86,5 @@ export class AdministrativeStaffService {
   downloadExcel(): Observable<Blob> {
     return this.http.get(`${this.apiUrl}/download`, { responseType: 'blob' });
   }
+  
 }

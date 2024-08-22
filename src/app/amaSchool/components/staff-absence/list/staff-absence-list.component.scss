@@ -1,0 +1,18 @@
+input[type="date"] {
+    height: 100%; /* Ajuste la hauteur pour qu'elle soit équivalente aux autres */
+    padding: 0.5rem; /* Ajuste l'espacement interne */
+    box-sizing: border-box; /* Inclut le padding et la bordure dans la taille totale */
+}
+.text-success {
+    background-color: #32ab4e; /* Couleur de fond pour "Justified" */
+     color: #0e0f0e; /* Couleur du texte pour "Justified" */
+     padding: 10px;
+     border-radius: 4px;
+     }
+     
+     .text-danger {
+    background-color: #e45151; /* Couleur de fond pour "Unjustified" */
+     color: #050404; /* Couleur du texte pour "Unjustified" */
+     padding: 10px;
+     border-radius: 4px;
+     }

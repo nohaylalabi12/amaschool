@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup } from "@angular/forms";
 import { Message, MessageService } from "primeng/api";
 import { ActivatedRoute, Router } from "@angular/router";
 import { StaffAbsenceService } from "../../../service/staff-absence.service";
+import { AdministrativeStaffService } from '../../../service/administrative-staff.service';
+import { AdministrativeStaff } from "../../../models/administrative-staff";
 
 @Component({
   selector: 'app-staff-absence-list',
@@ -13,6 +15,7 @@ import { StaffAbsenceService } from "../../../service/staff-absence.service";
 })
 export class StaffAbsenceListComponent implements OnInit {
   absences: StaffAbsenceResponse[] = [];
+  staffs: any[] = []; // Dropdown options for administrative staff
   searchForm!: FormGroup;
   totalElements: number = 0;
   display: boolean = false;
@@ -25,8 +28,7 @@ export class StaffAbsenceListComponent implements OnInit {
   searchOptions = [
     { label: 'Staff Code', value: 'staffCode' },
     { label: 'Staff Name', value: 'staffName' },
-    { label: 'Absence Code', value: 'absenceCode' },
-    { label: 'Absence Date', value: 'absenceDate' }
+    { label: 'Absence Code', value: 'staffAbsenceCode' }
   ];
 
   // Property to hold the selected search type
@@ -37,7 +39,8 @@ export class StaffAbsenceListComponent implements OnInit {
     private absenceService: StaffAbsenceService,
     private messageService: MessageService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private administrativeStaffService: AdministrativeStaffService
   ) {}
 
   ngOnInit(): void {
@@ -57,14 +60,33 @@ export class StaffAbsenceListComponent implements OnInit {
 
     // Initialize searchForm with all necessary controls
     this.searchForm = this.fb.group({
-      searchType: [this.selectedSearchType],
-      searchValue: ['']
+      staffAbsenceCode: [''],
+      absenceDate: [''],
+      staffCode: [''],
     });
 
     // Update the selected search type when the dropdown changes
     this.searchForm.get('searchType')?.valueChanges.subscribe(value => {
       this.selectedSearchType = value;
     });
+
+    this.loadStaffs(); // Load administrative staff
+  }
+
+  // Load the staff options for the dropdown
+  loadStaffs() {
+    this.administrativeStaffService.getAllStaff(0, 100).subscribe(
+      data => {
+        this.staffs = data.staff.map((staff: AdministrativeStaff) => ({
+          label: `${staff.firstName} ${staff.lastName}`,
+          value: staff.administrativeStaffCode
+        }));
+      },
+      error => {
+        console.error('Error loading staff', error);
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to load staff.' });
+      }
+    );
   }
 
   showSuccessViaToast() {
@@ -104,6 +126,9 @@ export class StaffAbsenceListComponent implements OnInit {
   navigateToUpdateAbsence(staffAbsenceCode: string) {
     this.router.navigate(['staff-absence/update'], { queryParams: { code: staffAbsenceCode } });
   }
+  navigateToDetails(staffAbsenceCode: any) {
+    this.router.navigate(['staff-absence/details'], { queryParams: { code: staffAbsenceCode } });
+  }
 
   onPageChange(event: any): void {
     const page = event.page;
@@ -129,37 +154,35 @@ export class StaffAbsenceListComponent implements OnInit {
     );
   }
 
-  applySearch(): void {
-    const searchType = this.searchForm.get('searchType')?.value;
-    const searchValue = this.searchForm.get('searchValue')?.value || '';
-
-    // If no search value is provided, load all absences
-    if (!searchValue) {
-      this.loadAbsences(0, 10); 
-      return;
-    }
-
-    let criteria: any = {};
-    if (searchType === 'absenceDate') {
-      const date = new Date(searchValue);
-      // Adjusting the date by converting to UTC to avoid timezone-related issues
-      const adjustedDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-      criteria[searchType] = adjustedDate.toISOString().split('T')[0];
+  search(): void {
+    this.absences = [];
+    const absenceDate = this.searchForm.get('absenceDate')?.value;
+  
+    if (absenceDate) {
+      this.absenceService.search(
+        this.searchForm.get('staffAbsenceCode')?.value,
+        this.searchForm.get('staffCode')?.value,
+        absenceDate
+      ).subscribe(content => {
+        this.absences = content.absences;
+        this.totalElements = content.totalElements;
+      });
     } else {
-      criteria[searchType] = searchValue;
+      this.absenceService.search(
+        this.searchForm.get('staffAbsenceCode')?.value,
+        this.searchForm.get('staffCode')?.value,
+        absenceDate // could be null or undefined
+      ).subscribe(content => {
+        this.absences = content.absences;
+        this.totalElements = content.totalElements;
+      });
     }
-
-    console.log('Search criteria:', criteria);
-
-    this.absenceService.getStaffAbsencesByCriteria(criteria).subscribe(response => {
-      this.absences = response.staffAbsences;
-      console.log(response.staffAbsences);
-      
-      this.totalElements = response.totalElements;
-    }, error => {
-      console.error('Error fetching filtered absences:', error);
-    });
   }
+
+
+    
+  
+  
 
   formatTimeToHoursAndMinutes(time: string): string {
     if (!time) return ''; // Return an empty string if no time is provided

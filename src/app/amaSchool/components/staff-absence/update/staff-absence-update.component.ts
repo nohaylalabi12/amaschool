@@ -28,10 +28,14 @@ export class StaffAbsenceUpdateComponent implements OnInit {
         private router: Router,
         private cdr: ChangeDetectorRef
     ) {}
-
-    ngOnInit() {
+    absenceStatusOptions = [
+        { label: 'Justified', value: 'Justified' },
+        { label: 'Unjustified', value: 'Unjustified' }
+      ];
+      
+      ngOnInit() {
         this.absenceForm = this.fb.group({
-             staffAbsenceCode:  [{value: '', disabled: true}, Validators.required],
+            staffAbsenceCode:  [{value: '', disabled: true}, Validators.required],
             administrativeStaffCode: ['', Validators.required],
             absenceDate: ['', Validators.required],
             startTime: ['', Validators.required],
@@ -39,16 +43,17 @@ export class StaffAbsenceUpdateComponent implements OnInit {
             absenceCause: ['', Validators.required],
             absenceStatus: ['', Validators.required],
         });
-
+    
         this.route.queryParams.subscribe((params) => {
             this.absenceCode = params['code'];
             if (this.absenceCode) {
                 this.loadAbsenceDetails();
             }
         });
-
+    
         this.loadStaff(); // Load administrative staff for selection
     }
+    
 
     loadAbsenceDetails() {
         if (!this.absenceCode) return;
@@ -99,35 +104,35 @@ export class StaffAbsenceUpdateComponent implements OnInit {
     }
 
    
- updateAbsence() {
-    if (this.absenceForm.valid) {
-      // Format start and end times before sending to backend
-      const formattedStartTime = this.formatTime(this.absenceForm.get('startTime')?.value);
-      const formattedEndTime = this.formatTime(this.absenceForm.get('endTime')?.value);
-
-      const updatedAbsenceData:StaffAbsenceRequest= {
-        id: 0,  // Adjust based on your logic
-        staffAbsenceCode: this.absenceForm.get('staffAbsenceCode')?.value,
-        administrativeStaffCode: this.absenceForm.get('administrativeStaffCode')?.value,
-        absenceDate: this.absenceForm.get('absenceDate')?.value.toISOString().split('T')[0],  // Format to 'YYYY-MM-DD'
-        startTime: formattedStartTime,  // Use formatted time here
-        endTime: formattedEndTime,      // Use formatted time here
-        absenceCause: this.absenceForm.get('absenceCause')?.value,
-        absenceStatus: this.absenceForm.get('absenceStatus')?.value
-      };
-
-      this.absenceService.updateStaffAbsence(updatedAbsenceData).subscribe(
-        () => {
-          this.router.navigate(['staff-absence/list']);
-        },
-        error => {
-          console.error(`Error while updating absence with code ${this.absenceCode}`, error);
+    updateAbsence() {
+        if (this.absenceForm.valid) {
+          // Format start and end times before sending to backend
+          const formattedStartTime = this.formatTime(this.absenceForm.get('startTime')?.value);
+          const formattedEndTime = this.formatTime(this.absenceForm.get('endTime')?.value);
+    
+          const updatedAbsenceData:StaffAbsenceRequest= {
+            id: 0,  // Adjust based on your logic
+            staffAbsenceCode: this.absenceForm.get('staffAbsenceCode')?.value,
+            administrativeStaffCode: this.absenceForm.get('administrativeStaffCode')?.value,
+            absenceDate: this.absenceForm.get('absenceDate')?.value.toISOString().split('T')[0],  // Format to 'YYYY-MM-DD'
+            startTime: formattedStartTime,  // Use formatted time here
+            endTime: formattedEndTime,      // Use formatted time here
+            absenceCause: this.absenceForm.get('absenceCause')?.value,
+            absenceStatus: this.absenceForm.get('absenceStatus')?.value
+          };
+    
+          this.absenceService.updateStaffAbsence(updatedAbsenceData).subscribe(
+            () => {
+              this.router.navigate(['staff-absence/list']);
+            },
+            error => {
+              console.error(`Error while updating absence with code ${this.absenceCode}`, error);
+            }
+          );
+        } else {
+          this.absenceForm.markAllAsTouched();
         }
-      );
-    } else {
-      this.absenceForm.markAllAsTouched();
-    }
-  }
+      }
 
   
   

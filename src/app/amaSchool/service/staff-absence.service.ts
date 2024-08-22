@@ -27,66 +27,32 @@ export class StaffAbsenceService {
     );
   }
 
-  // Corrected method to get staff absence by code
-  getStaffAbsenceByCode(absenceCode: string): Observable<any> {
+  // Method to get staff absences by criteria
+  search(staffAbsenceCode: string, staffCode: string, absenceDate: string): Observable<{ absences: StaffAbsenceResponse[], totalElements: number }> {
     let params: any = new HttpParams();
 
-    // Append the absence code as a parameter if it exists
-    if (absenceCode) {
-      params = params.append('staffAbsenceCode', absenceCode);
+    if (staffAbsenceCode !== undefined && staffAbsenceCode !== '') {
+      params = params.append('staffAbsenceCode', staffAbsenceCode);
     }
 
-    // Make the GET request with the parameters
+    if (staffCode !== undefined && staffCode !== '') {
+      params = params.append('staffCode', staffCode);
+    }
+
+    if (absenceDate !== undefined && absenceDate !== '') {
+      params = params.append('absenceDate', absenceDate);
+    }
+
     return this.http.get<any>(this.apiUrl, { params }).pipe(
       map(response => {
-        const staffAbsences: StaffAbsenceResponse[] = response.content;
+        const absences: StaffAbsenceResponse[] = response.content;
         const totalElements: number = response.totalElements;
-        return { staffAbsences, totalElements };
+        return { absences, totalElements };
       })
     );
   }
 
-  // Method to get staff absences by criteria
-  getStaffAbsencesByCriteria(criteria: {
-    id?: number,
-    staffAbsenceCode?: string,
-    absenceDate?: string,
-    absenceStatus?: string,
-    staffCode?: string,
-    staffName?: string
-  }): Observable<{ staffAbsences: StaffAbsenceResponse[], totalElements: number }> {
-    let params = new HttpParams();
-
-if (criteria.id) {
-  params = params.append('id', criteria.id.toString()); // Reassign params
-}
-if (criteria.staffAbsenceCode) {
-  params = params.append('staffAbsenceCode', criteria.staffAbsenceCode); // Reassign params
-}
-if (criteria.absenceDate) {
-  params = params.append('absenceDate', criteria.absenceDate); // Reassign params
-}
-if (criteria.absenceStatus) {
-  params = params.append('absenceStatus', criteria.absenceStatus); // Reassign params
-}
-if (criteria.staffCode) {
-  params = params.append('staffCode', criteria.staffCode); // Reassign params
-}
-if (criteria.staffName) {
-  params = params.append('staffName', criteria.staffName); // Reassign params
-}
-
-
-    return this.http.get<any>(this.apiUrl, { params }).pipe(
-      map(response => {
-        const staffAbsences: StaffAbsenceResponse[] = response.content;
-        const totalElements: number = response.totalElements;
-        return { staffAbsences, totalElements };
-      })
-    );
-  }
-
-  private handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'An unknown error occurred!';
     if (error.error instanceof ErrorEvent) {
       // Client-side or network error
@@ -108,14 +74,68 @@ if (criteria.staffName) {
     return this.http.put<StaffAbsenceResponse>(this.apiUrl, staffAbsence);
   }
 
-  // Method to delete a staff absence by code
+  // Method to delete a staff absence by its code
   deleteStaffAbsence(absenceCode: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}?code=${absenceCode}`);
   }
 
-  // Method to download absences as Excel file
+  // Method to download absences as an Excel file
   downloadExcel(): Observable<Blob> {
     return this.http.get(`${this.apiUrl}/download`, { responseType: 'blob' });
   }
+
+  // Method to get absence by code
+  getAbsenceByCode(staffAbsenceCode: string): Observable<{ absences: StaffAbsenceResponse[], totalElements: number }> {
+    let params: any = new HttpParams();
+
+    if (staffAbsenceCode !== undefined && staffAbsenceCode !== '') {
+      params = params.append('staffAbsenceCode', staffAbsenceCode);
+    }
+
+    return this.http.get<any>(this.apiUrl, { params }).pipe(
+      map(response => {
+        const absences: StaffAbsenceResponse[] = response.content;
+        const totalElements: number = response.totalElements;
+        return { absences, totalElements };
+      })
+    );
+  }
+   // Corrected method to get staff absence by code
+   getStaffAbsenceByCode(absenceCode: string): Observable<any> {
+    let params: any = new HttpParams();
+
+    // Append the absence code as a parameter if it exists
+    if (absenceCode) {
+      params = params.append('staffAbsenceCode', absenceCode);
+    }
+
+    // Make the GET request with the parameters
+    return this.http.get<any>(this.apiUrl, { params }).pipe(
+      map(response => {
+        const staffAbsences: StaffAbsenceResponse[] = response.content;
+        const totalElements: number = response.totalElements;
+        return { staffAbsences, totalElements };
+      })
+    );
+  }
+  // Method to get staff absences by administrative staff code
+  /*getAbsencesByStaffCode(administrativeStaffCode: string): Observable<StaffAbsenceResponse[]> {
+    let params = new HttpParams().set('staffCode', administrativeStaffCode);
+
+    return this.http.get<any>(`${this.apiUrl}`, { params }).pipe(
+      map(response => {
+        return response.content.map((absence: any) => ({
+          staffAbsenceCode: absence.staffAbsenceCode,
+          absenceDate: absence.absenceDate,
+          absenceCause: absence.absenceCause,
+          startTime: absence.startTime,
+          endTime: absence.endTime,
+          absenceStatus: absence.absenceStatus,
+        }));
+      })
+    );
+  }
+    */
+
+
 }
- 

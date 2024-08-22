@@ -119,21 +119,20 @@ export class AdministrativeStaffListComponent implements OnInit {
     );
   }
 
-  exportExcel() {
-    if (this.staffList && this.staffList.length > 0) {
-      this.administrativeStaffService.downloadExcel().subscribe(response => {
-        const blob = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  
+  downloadExcelFile() {
+    this.administrativeStaffService.downloadExcel().subscribe(
+      (blob) => {
         const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'administrative-staff.xlsx';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = 'administrative-staff.xlsx';  // Change to the desired file name
+        anchor.click();
         window.URL.revokeObjectURL(url);
-      });
-    } else {
-      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'No data to export.' });
-    }
+      },
+      (error) => {
+        console.error('Error downloading the file', error);
+      }
+    );
   }
 }

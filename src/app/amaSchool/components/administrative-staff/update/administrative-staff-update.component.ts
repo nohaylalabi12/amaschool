@@ -56,31 +56,31 @@ export class AdministrativeStaffUpdateComponent {
       });
   }
   
-    updateStaff() {
-        if (this.staffForm.valid) {
-            const updatedData = {
-                administrativeStaffCode: this.staffCode,
-                firstName: this.staffForm.get('firstName')?.value,
-                lastName: this.staffForm.get('lastName')?.value,
-                email: this.staffForm.get('email')?.value,
-                phone: this.staffForm.get('phone')?.value,
-                role: this.staffForm.get('role')?.value
-            };
+  updateStaff() {
+    if (this.staffForm.valid) {
+        const updatedData = {
+            administrativeStaffCode: this.staffCode,
+            firstName: this.staffForm.get('firstName')?.value,
+            lastName: this.staffForm.get('lastName')?.value,
+            email: this.staffForm.get('email')?.value,
+            phone: this.staffForm.get('phone')?.value,
+            role: this.staffForm.get('role')?.value
+        };
 
-            this.administrativeStaffService.updateStaff(updatedData).subscribe(
-                () => {
-                    this.staffUpdated = "updated";
-                    this.router.navigate(['administrative-staff/list'], { queryParams: { staffUpdated: this.staffUpdated } });
-                    setTimeout(() => {
-                        this.router.navigate([], { queryParams: { staffUpdated: null }, queryParamsHandling: 'merge' });
-                    }, 200);
-                },
-                (error) => {
-                    console.error(`Error during staff update with code ${this.staffCode}`, error);
-                }
-            );
-        } else {
-            this.staffForm.markAllAsTouched();
-        }
+        this.administrativeStaffService.updateStaff(updatedData).subscribe(
+            () => {
+                this.staffUpdated = "updated";
+                this.router.navigate(['administrative-staff/list'], { queryParams: { staffUpdated: this.staffUpdated } });
+                setTimeout(() => {
+                    this.router.navigate([], { queryParams: { staffUpdated: null }, queryParamsHandling: 'merge' });
+                }, 200);
+            },
+            (error) => {
+                console.error(`Error during staff update with code ${this.staffCode}`, error);
+            }
+        );
+    } else {
+        this.staffForm.markAllAsTouched();
     }
+}
 }

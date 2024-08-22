@@ -6,7 +6,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
 import { StaffAbsenceUpdateComponent } from './staff-absence-update.component';
 import { StaffAbsenceUpdateRoutingModule } from './staff-absence-update-routing.module';
-
+import { DropdownModule } from 'primeng/dropdown';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +15,7 @@ import { StaffAbsenceUpdateRoutingModule } from './staff-absence-update-routing.
     ButtonModule,
     InputTextModule,
     CalendarModule,
+    DropdownModule,
     StaffAbsenceUpdateRoutingModule
   ],
   declarations: [StaffAbsenceUpdateComponent]

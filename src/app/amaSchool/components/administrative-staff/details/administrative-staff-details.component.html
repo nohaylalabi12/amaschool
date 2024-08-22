@@ -1,40 +1,81 @@
 <div class="card">
+    <!-- Bouton de retour en haut, visible pour tous les onglets -->
+    <div class="flex justify-content-end mb-2">
+      <a (click)="navigateToList()" class="text-primary cursor-pointer">
+        <i class="pi pi-arrow-left"></i> Retour
+      </a>
+    </div>
+    
     <p-tabView orientation="left">
-        <p-tabPanel header="Details" class="line-height-3 m-0">
-            <p-progressBar *ngIf="!administrativeStaff" mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
-            <div *ngIf="administrativeStaff">
-                <span class="text-900 font-medium text-4xl mb-4">{{ administrativeStaff.firstName }} {{ administrativeStaff.lastName }}</span>
-                <span class="text-primary font-medium text-4xl mb-4"> Information</span>
-            </div>
-            <hr />
-
-            <div class="grid formgrid p-fluid" *ngIf="administrativeStaff">
-                <div class="field mb-4 col-12 md:col-6">
-                    <label for="staffCode" class="font-bold text-900" style="font-size: 18px;">Code   :</label>
-                    <span id="staffCode" style="font-size: 18px; margin-left: 10px;">{{ administrativeStaff.administrativeStaffCode }}</span>
-                </div>
-                <div class="field mb-4 col-12 md:col-6">
-                    <label for="firstName" class="font-bold text-900" style="font-size: 18px;">First Name  :</label>
-                    <span id="firstName" style="font-size: 18px; margin-left: 10px;">{{ administrativeStaff.firstName }}</span>
-                </div>
-                <div class="field mb-4 col-12 md:col-6">
-                    <label for="lastName" class="font-bold text-900" style="font-size: 18px;">Last Name  :</label>
-                    <span id="lastName" style="font-size: 18px; margin-left: 10px;">{{ administrativeStaff.lastName }}</span>
-                </div>
-                <div class="field mb-4 col-12 md:col-6">
-                    <label for="email" class="font-bold text-900" style="font-size: 18px;">Email  :</label>
-                    <span id="email" style="font-size: 18px; margin-left: 10px;">{{ administrativeStaff.email }}</span>
-                </div>
-                <div class="field mb-4 col-12 md:col-6">
-                    <label for="phone" class="font-bold text-900" style="font-size: 18px;">Phone  :</label>
-                    <span id="phone" style="font-size: 18px; margin-left: 10px;">{{ administrativeStaff.phone }}</span>
-                </div>
-                <div class="field mb-4 col-12 md:col-6">
-                    <label for="role" class="font-bold text-900" style="font-size: 18px;">Role  :</label>
-                    <span id="role" style="font-size: 18px; margin-left: 10px;">{{ administrativeStaff.role }}</span>
-                </div>
-            </div>
-            
-        </p-tabPanel>
+      <p-tabPanel header="Details" class="line-height-3 m-0">
+        <p-progressBar *ngIf="!administrativeStaff" mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
+        <div *ngIf="administrativeStaff">
+          <span class="text-900 font-medium text-4xl mb-4">{{ administrativeStaff.firstName }} {{ administrativeStaff.lastName }}</span>
+          <span class="text-primary font-medium text-4xl mb-4"> Information</span>
+        </div>
+        <hr />
+  
+        <div class="grid formgrid p-fluid" *ngIf="administrativeStaff">
+          <div class="field mb-4 col-12 md:col-6">
+            <label for="staffCode" class="font-bold text-900" style="font-size: 18px;">Code :</label>
+            <span id="staffCode" style="font-size: 18px; margin-left: 10px;">{{ administrativeStaff.administrativeStaffCode }}</span>
+          </div>
+          <div class="field mb-4 col-12 md:col-6">
+            <label for="firstName" class="font-bold text-900" style="font-size: 18px;">First Name :</label>
+            <span id="firstName" style="font-size: 18px; margin-left: 10px;">{{ administrativeStaff.firstName }}</span>
+          </div>
+          <div class="field mb-4 col-12 md:col-6">
+            <label for="lastName" class="font-bold text-900" style="font-size: 18px;">Last Name :</label>
+            <span id="lastName" style="font-size: 18px; margin-left: 10px;">{{ administrativeStaff.lastName }}</span>
+          </div>
+          <div class="field mb-4 col-12 md:col-6">
+            <label for="email" class="font-bold text-900" style="font-size: 18px;">Email :</label>
+            <span id="email" style="font-size: 18px; margin-left: 10px;">{{ administrativeStaff.email }}</span>
+          </div>
+          <div class="field mb-4 col-12 md:col-6">
+            <label for="phone" class="font-bold text-900" style="font-size: 18px;">Phone :</label>
+            <span id="phone" style="font-size: 18px; margin-left: 10px;">{{ administrativeStaff.phone }}</span>
+          </div>
+          <div class="field mb-4 col-12 md:col-6">
+            <label for="role" class="font-bold text-900" style="font-size: 18px;">Role :</label>
+            <span id="role" style="font-size: 18px; margin-left: 10px;">{{ administrativeStaff.role }}</span>
+          </div>
+        </div>
+      </p-tabPanel>
+  <!-- Onglet Absences -->
+     <!--  <p-tabPanel header="Absences" class="line-height-3 m-0">
+        <p-progressBar *ngIf="!absences.length" mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
+        <div *ngIf="absences">
+          <span class="text-primary font-medium text-4xl mb-4"> Absence List</span>
+        </div>
+        <hr />
+        <br />
+        <div class="card">
+          <p-table [value]="absences" [paginator]="false" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
+                   currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,25,50]">
+            <ng-template pTemplate="header">
+              <tr>
+                <th pSortableColumn="absenceDate" class="white-space-nowrap" style="width:15%">Absence Date <p-sortIcon field="absenceDate"></p-sortIcon></th>
+                <th pSortableColumn="startTime" class="white-space-nowrap" style="width:15%">Start Time <p-sortIcon field="startTime"></p-sortIcon></th>
+                <th pSortableColumn="endTime" class="white-space-nowrap" style="width:15%">End Time <p-sortIcon field="endTime"></p-sortIcon></th>
+                <th pSortableColumn="absenceCause" class="white-space-nowrap" style="width:25%">Absence Cause <p-sortIcon field="absenceCause"></p-sortIcon></th>
+                <th pSortableColumn="absenceStatus" class="white-space-nowrap" style="width:15%">Absence Status <p-sortIcon field="absenceStatus"></p-sortIcon></th>
+              </tr>
+            </ng-template>
+  
+            <ng-template pTemplate="body" let-absence>
+                <tr>
+                    <td>{{ absence.absenceDate }}</td>
+                    <td>{{ absence.startTime }}</td>
+                    <td>{{ absence.endTime }}</td>
+                    <td>{{ absence.absenceCause }}</td>
+                    <td>{{ absence.absenceStatus }}</td>
+                  </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </p-tabPanel>  -->
+      
     </p-tabView>
-</div>
+  </div>
+  

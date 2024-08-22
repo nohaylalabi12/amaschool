@@ -1,0 +1,46 @@
+<div class="card">
+  <div class="flex justify-content-end mb-2">
+      <a (click)="navigateToList()" class="text-primary cursor-pointer">
+          <i class="pi pi-arrow-left"></i> Retour
+      </a>
+  </div>
+
+  <p-tabView orientation="left">
+      <p-tabPanel header="Details" class="line-height-3 m-0">
+          <p-progressBar *ngIf="!staffAbsence" mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
+          <div *ngIf="staffAbsence">
+              <span class="text-900 font-medium text-4xl mb-4">{{ staffAbsence.administrativeStaff.firstName }}
+                {{ staffAbsence.administrativeStaff.lastName }}</span>
+              <span class="text-primary font-medium text-4xl mb-4"> Information</span>
+          </div>
+          <hr />
+
+          <div class="grid formgrid p-fluid" *ngIf="staffAbsence">
+              <div class="field mb-4 col-12 md:col-6">
+                  <label for="absenceDate" class="font-bold text-900" style="font-size: 18px;">Absence Code:</label>
+                  <span id="staffAbsenceCode" style="font-size: 18px;">{{ staffAbsence.staffAbsenceCode }}</span>
+              </div>
+              <div class="field mb-4 col-12 md:col-6">
+                <label for="absenceDate" class="font-bold text-900" style="font-size: 18px;">Absence Date:</label>
+                <span id="absenceDate" style="font-size: 18px;">{{ staffAbsence.absenceDate }}</span>
+            </div>
+              <div class="field mb-4 col-12 md:col-6">
+                  <label for="startTime" class="font-bold text-900" style="font-size: 18px;">Start Time:</label>
+                  <span id="startTime" style="font-size: 18px;">{{ staffAbsence.startTime }}</span>
+              </div>
+              <div class="field mb-4 col-12 md:col-6">
+                  <label for="endTime" class="font-bold text-900" style="font-size: 18px;">End Time:</label>
+                  <span id="endTime" style="font-size: 18px;">{{ staffAbsence.endTime }}</span>
+              </div>
+              <div class="field mb-4 col-12 md:col-6">
+                  <label for="absenceCause" class="font-bold text-900" style="font-size: 18px;">Absence Cause:</label>
+                  <span id="absenceCause" style="font-size: 18px;">{{ staffAbsence.absenceCause }}</span>
+              </div>
+              <div class="field mb-4 col-12 md:col-6">
+                  <label for="absenceStatus" class="font-bold text-900" style="font-size: 18px;">Absence Status:</label>
+                  <span id="absenceStatus" style="font-size: 18px;">{{ staffAbsence.absenceStatus }}</span>
+              </div>
+          </div>
+      </p-tabPanel>
+  </p-tabView>
+</div>
